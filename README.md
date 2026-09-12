@@ -88,6 +88,31 @@ Existing-ticket requests update the relevant specification after reading the tic
 
 For individual roles, ask Codex in ordinary language, for example `Have scout locate the billing implementation and its project rules` or `Have bughunter diagnose this failure and return an implementation handoff`. There is no kit-specific slash command for a role. In the tested WSL 0.154 host, named-role selection was unavailable. The macOS tester subsequently reported direct scout selection through `agent_type: "scout"`, without fallback. On the WSL host, the loop instead supplied the installed role instructions to a child. This fallback inherits the parent's sandbox and skill availability; it cannot apply role-level sandbox or `skills.config` settings. Explicit model/reasoning overrides can be forwarded when the host's spawn tool supports them.
 
+The kit also includes focused tools for work across frontend, services and CLI projects:
+
+| Skill | Use |
+| --- | --- |
+| `verify-this` | Compare baseline and changed behavior to verify a fix or performance claim. |
+| `handoff` | Save current task state and references for another session, including checkpoints and remaining review work. |
+| `cli-for-agents` | Design commands with flags, useful help, retry-safe behavior and unattended operation. |
+| `improve-codebase-architecture` | Survey maintenance hotspots and discuss concrete refactoring candidates in an HTML report. |
+| `make-pr-easy-to-review` | Prepare accurate PR descriptions, verification evidence and reviewer reading guidance. Writer uses it during normal PR preparation; history rewriting is optional. |
+| `why` | Investigate documented intent behind legacy code using history and relevant external evidence, with explicit uncertainty. |
+
+Invoke `handoff` and `improve-codebase-architecture` explicitly when needed. The other additions can apply when the current task fits. PR preparation follows existing publication authorization and does not start another correctness review round. Framework-specific commands and conventions still come from each project's instructions.
+
+For an agreed specification spanning multiple tickets, explicitly invoke `$implement-spec` with the spec or ticket graph. It reuses the existing roles, integrates predecessors and checks their agreed prerequisites before starting dependent tickets, and reviews the combined result. Independent tickets can run in parallel in available isolated contexts; otherwise it works sequentially. Additional working copies remain user-managed. Use `$development-loop` for a single ticket.
+
+`resolving-merge-conflicts` handles in-progress merge, rebase, update or integration conflicts through the project's VCS. It preserves both changes' intent where possible, runs relevant checks and respects publication boundaries when completing an operation.
+
+## VCS and review systems
+
+Skills follow each project's chosen VCS and code-review host. They use native task identifiers, comparisons and checkpoints without requiring Git, a staging area, a task branch or a branch named main. Co-located metadata and hosting URLs do not override the project's working tool. Review requests can be pull requests, merge requests, changelists or patch reviews.
+
+A centralized submit counts as publication and follows existing authorization. Local file snapshots can support comparison and handoff when no VCS is present; unavailable history remains an explicit limitation. Prototype and research artifacts can live in task-scoped storage instead of throwaway branches.
+
+This kit's own source repository and upstream attribution use GitHub. Installer-source comparison commands are maintenance tools for this repository, not instructions for a project's VCS.
+
 ## Customize
 
 Edit `kit/agents/*.toml` for role behavior, `model` and `model_reasoning_effort`. The current trial configuration is:

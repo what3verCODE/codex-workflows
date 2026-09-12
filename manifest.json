@@ -271,40 +271,107 @@
     },
     {
       "name": "prototype",
-      "kind": "upstream",
+      "kind": "local",
       "upstream": {
         "repository": "https://github.com/mattpocock/skills",
         "path": "skills/engineering/prototype",
         "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
-        "previousInstalledHash": "d3fc74689bd993e39c44bfae510d014eecffbeec2922764b065377fd1327c0f6"
+        "previousInstalledHash": "d3fc74689bd993e39c44bfae510d014eecffbeec2922764b065377fd1327c0f6",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
       },
-      "files": [
-        {
-          "path": "LOGIC.md",
-          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/LOGIC.md",
-          "sha256": "f61c7d249e786a79ef289018901c348271e1798dd0b0bc5607b5c6f4d4a01ab9"
-        },
-        {
-          "path": "SKILL.md",
-          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/SKILL.md",
-          "sha256": "714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3"
-        },
-        {
-          "path": "UI.md",
-          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/UI.md",
-          "sha256": "723211e878acbc7b6ff09755263f3295cde724ba902ff0064da41eed51d45ad3"
-        },
-        {
-          "path": "agents/openai.yaml",
-          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/agents/openai.yaml",
-          "sha256": "5af65e43ab41a350436697b81e27b7f848d36782043b73c322bb2c9fa9cc55dc"
-        },
-        {
-          "path": "LICENSE",
-          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
-          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
-        }
-      ]
+      "path": "kit/skills/prototype"
+    },
+    {
+      "name": "verify-this",
+      "kind": "local",
+      "path": "kit/skills/verify-this",
+      "upstream": {
+        "repository": "https://github.com/poteto/plugins",
+        "path": "cursor-team-kit/skills/verify-this",
+        "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "handoff",
+      "kind": "local",
+      "path": "kit/skills/handoff",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/productivity/handoff",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "adaptations": "See PROVENANCE.md for the maintained changes.",
+        "previousInstalledHash": "20e5f4afdef502637510bc5c64d27645d3c85c88df9cb006824bbb0980166319"
+      }
+    },
+    {
+      "name": "cli-for-agents",
+      "kind": "local",
+      "path": "kit/skills/cli-for-agents",
+      "upstream": {
+        "repository": "https://github.com/poteto/plugins",
+        "path": "cli-for-agent/skills/cli-for-agents",
+        "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "kind": "local",
+      "path": "kit/skills/improve-codebase-architecture",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/improve-codebase-architecture",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "adaptations": "See PROVENANCE.md for the maintained changes.",
+        "previousInstalledHash": "2449db6ab1ded9581f69fcc56c1f64818112d05e271fd4c5da23c6523f9d3d9d"
+      }
+    },
+    {
+      "name": "make-pr-easy-to-review",
+      "kind": "local",
+      "path": "kit/skills/make-pr-easy-to-review",
+      "upstream": {
+        "repository": "https://github.com/poteto/plugins",
+        "path": "cursor-team-kit/skills/make-pr-easy-to-review",
+        "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "why",
+      "kind": "local",
+      "path": "kit/skills/why",
+      "upstream": {
+        "repository": "https://github.com/poteto/plugins",
+        "path": "pstack/skills/why",
+        "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "kind": "local",
+      "path": "kit/skills/resolving-merge-conflicts",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/resolving-merge-conflicts",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "adaptations": "See PROVENANCE.md for the maintained changes.",
+        "previousInstalledHash": "63b2dcadbe9124caeb3448f1378286fe18dcefb2494f60e136831b8b4986ca27"
+      }
+    },
+    {
+      "name": "implement-spec",
+      "kind": "local",
+      "path": "kit/skills/implement-spec",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/in-progress/implement-spec",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "adaptations": "See PROVENANCE.md for the maintained changes.",
+        "previousInstalledHash": "91670f6f5239fc64da91c2b2f6ada62a27d2f0e8e18215fefe53feeea7a43801"
+      }
     }
   ],
   "agents": [
@@ -347,7 +414,8 @@
       "skills": [
         "workflow-writing",
         "unslop",
-        "writing-for-agents"
+        "writing-for-agents",
+        "make-pr-easy-to-review"
       ]
     },
     {

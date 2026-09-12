@@ -5,7 +5,7 @@ description: Review a fixed task change with independent standards, specificatio
 
 ## Pin the change
 
-Read `../workflow-context/SKILL.md`. Resolve the task, original per-repository baselines and current checkpoints from supplied evidence and workspace VCS tools. For PRs, retrieve metadata, changed files and per-file changes using configured VCS instructions. Use stable revision or snapshot identifiers, including supplied non-Git comparisons. Missing task evidence limits specification review; it does not justify inventing a spec. Ask only when the comparison itself remains ambiguous.
+Read `../workflow-context/SKILL.md`. Resolve the task, original per-repository baselines and current checkpoints from supplied evidence and workspace VCS tools. For a review request, retrieve metadata, changed files and per-file changes through the project's configured review host and VCS tools. Use stable revision or snapshot identifiers, including supplied non-Git comparisons. Missing task evidence limits specification review; it does not justify inventing a spec. Ask only when the comparison itself remains ambiguous.
 
 Every specialist inspects the complete task change between the original baselines and these checkpoints. Include relevant pre-existing task work in that range. Verify the source state before and after analyses. If files change during review, discard affected conclusions and report the inconsistent state; do not call a mixed-state review complete. Review children are read-only and never run coordinating reviews or repairs.
 

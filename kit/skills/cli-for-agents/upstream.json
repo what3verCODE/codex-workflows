@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/poteto/plugins",
+  "path": "cli-for-agent/skills/cli-for-agents",
+  "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+  "adaptations": "See PROVENANCE.md for the maintained changes."
+}

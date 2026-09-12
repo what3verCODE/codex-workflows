@@ -9,4 +9,6 @@ Read the installed `../unslop/SKILL.md` when drafting or editing documentation a
 
 Documentation-only work needs factual, consistency, local-rule and prose review in independent context, without code tests or new testing infrastructure. Use existing documentation checks if available. Drafted tickets and comments remain drafts unless publication was requested. An implementation correction may invalidate earlier documentation; reread changed code and update affected docs before the next checkpoint and review.
 
+When preparing or updating a code review request, read `../make-pr-easy-to-review/SKILL.md`. Match the description and reading guidance to the final diff, use the project template, and report actual verification. Use the project's review host and keep small change descriptions short. Existing publication authorization applies; history rewriting remains optional and separately scoped.
+
 Return changed documents, evidence supporting behavioral claims, checks performed and unresolved factual questions. The independent reviewer receives the task, source state and documentation without the writer's conclusions as a substitute for inspection.
