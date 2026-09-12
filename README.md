@@ -90,7 +90,21 @@ For individual roles, ask Codex in ordinary language, for example `Have scout lo
 
 ## Customize
 
-Edit `kit/agents/*.toml` for role behavior and optional `model` and `model_reasoning_effort` overrides. Defaults inherit the parent settings, so the kit makes no unverified model assignment. Check your runtime's available models before adding an override. Edit `manifest.json` to change required skills for a role, add upstream requirements, or select local forks. The installer adds supported `skills.config` entries with resolved skill paths. Required-skill instructions guide behavior; they do not guarantee exclusion of other skills or tools.
+Edit `kit/agents/*.toml` for role behavior, `model` and `model_reasoning_effort`. The current trial configuration is:
+
+| Role | Model | Reasoning |
+| --- | --- | --- |
+| scout | `gpt-5.6-terra` | medium |
+| oracle | `gpt-6-astra` | medium |
+| worker | `gpt-5.6-terra` | high |
+| bughunter | `gpt-6-astra` | high |
+| writer | `gpt-5.6-sol` | medium |
+| reviewer | `gpt-6-astra` | medium |
+| review_specialist | `gpt-5.6-terra` | high |
+
+Use Astra with medium reasoning for the main session through your Codex model settings. The installer configures child roles and does not change the main session's configuration. These assignments are a trial, not a benchmarked optimum. Check model availability in your runtime; remove both overrides from a role to inherit the parent settings.
+
+Other role settings include `description` for role selection, `developer_instructions` for behavior, `sandbox_mode` for execution restrictions, `mcp_servers` for MCP configuration, and `skills.config` for skill enablement. See the [custom agent schema](https://learn.chatgpt.com/docs/agent-configuration/subagents). Keep concurrency settings in the main `.codex/config.toml`, under `[agents]`. Edit `manifest.json` to change required skills for a role, add upstream requirements, or select local forks. The installer adds supported `skills.config` entries with resolved skill paths. Required-skill instructions guide behavior; they do not guarantee exclusion of other skills or tools.
 
 Unslop applies to documentation and memory-bank writing, not routine answers, scout findings or agent reports. Its original cleanup rules are preserved.
 

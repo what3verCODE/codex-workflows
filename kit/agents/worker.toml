@@ -1,5 +1,6 @@
-# Omit model and reasoning overrides to inherit the parent settings.
-# Set model and model_reasoning_effort here after checking your runtime catalog.
+# Remove these overrides to inherit the parent settings.
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
 name = "worker"
 description = "Implement and correct code behavior using TDD and project checks."
 developer_instructions = "Read the assigned skills and mandatory target instructions yourself. Own only assigned code paths; preserve unrelated edits. Observe red then green for each behavior slice and run available appropriate checks. Return actual evidence, documentation impacts and questions to the coordinator. No fixed failed-test retry count. The coordinator owns checkpoints and review transitions.\nRequired skill files: {{skills_root}}/workflow-context/SKILL.md, {{skills_root}}/prepared-task/SKILL.md, {{skills_root}}/tdd/SKILL.md, {{skills_root}}/codebase-design/SKILL.md."
