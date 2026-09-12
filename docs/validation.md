@@ -28,7 +28,7 @@ WSL kernel was `6.18.33.2-microsoft-standard-WSL2`, x86_64 with glibc 2.39; Pyth
 
 The supported prompt form is `$development-loop TICKET-ID optional instructions`. The CLI receives it as quoted prompt text. Prompt rendering verifies discovery, not completion of a live ticket. The live 0.154 scout found `/tmp/workflow installed kit/.agents/skills/development-loop/SKILL.md` after receiving the installed scout TOML instructions in a child. The live session reported 240034 input tokens, 222208 cached input tokens and 899 output tokens. These are whole-session counters, not a measurement of savings or a budget guarantee.
 
-The tested host could not select named roles directly. Fallback execution cannot apply role-level sandbox or skill-enable settings; parent settings remain effective. Defaults inherit the parent model, so no comparative model-quality claims or unverified assignments are made. Automated native role selection, role-specific model overrides and skill controls remain unverified. Standard TOML role files follow the official configuration documentation, but parsing and file presence do not establish their activation in this host.
+The tested WSL host could not select named roles directly. Fallback execution cannot apply role-level sandbox or skill-enable settings; parent settings remain effective. Defaults inherit the parent model, so no comparative model-quality claims or unverified assignments are made. Native scout selection was subsequently reported on macOS; role-specific model overrides and skill controls remain unverified. Standard TOML role files follow the official configuration documentation, but parsing and file presence do not establish their activation in this host.
 
 ## Behavioral evaluations
 
@@ -54,7 +54,7 @@ Thread limits required reuse of existing evaluator contexts for some specialists
 
 ## Issue status
 
-The implementation covers the installer, discovery guidance, setup-free preparation, readiness/TDD/checkpoints, diagnosis handoff, combined review, documentation and development loop requested in #2–#9. GitHub issues remain open because native role activation and several requested environment/behavioral checks above are still unverified. The kit does not claim complete acceptance on the strength of prompt text or stub evaluations alone.
+The implementation covers the installer, discovery guidance, setup-free preparation, readiness/TDD/checkpoints, diagnosis handoff, combined review, documentation and development loop requested in #2–#9. The user accepted the macOS installation checks and approved promotion to main. Remaining environment and behavioral limits above are recorded separately from that acceptance; unrun checks are not represented as passing.
 
 ## Source review
 
@@ -63,3 +63,7 @@ Two independent reviewers inspected the complete `bdef69b..5b0e0e8` source chang
 ## Documentation-only unslop scope
 
 The macOS scout test exposed the upstream unslop description, which required application to every answer. The kit now maintains a fork changing only that description to documentation and memory-bank writing. Reviewer no longer requires unslop unconditionally. Routine answers, status updates and scout reports do not activate it. Upstream cleanup rules are unchanged. Existing independent user/global installations can still expose their own unslop instructions; the kit does not overwrite unrelated installations.
+
+## macOS acceptance follow-up
+
+After updating the temporary installation, the user reported that scout ran without invoking unslop. Oracle then identified missing project context and discount rules and requested an input/current/expected example instead of inventing behavior. The user accepted the installation and agreed to move forward. These are user-reported observations, not captured tool traces or complete end-to-end workflow verification.

@@ -4,7 +4,7 @@ Install editable Codex roles and skills, then run one ticket through discovery, 
 
 ## Install with one command
 
-Once `setup.sh` is published on `main`, install globally with:
+Install globally with:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/setup.sh | sh
@@ -75,7 +75,7 @@ $to-tickets split the agreed spec into tracer-bullet tickets
 
 Existing-ticket requests update the relevant specification after reading the ticket and preserve unrelated content and discussion. New-issue requests create a new issue in the resolved destination. Drafts do not publish automatically. No tracker setup document or readiness label is required.
 
-For individual roles, ask Codex in ordinary language, for example `Have scout locate the billing implementation and its project rules` or `Have bughunter diagnose this failure and return an implementation handoff`. There is no kit-specific slash command for a role. In the tested WSL 0.154 host, named-role selection was unavailable. The macOS tester subsequently reported direct scout selection through `agent_type: "scout"`, without fallback. The loop instead supplied the installed role instructions to a child. This fallback inherits the parent's sandbox and skill availability; it cannot apply role-level sandbox or `skills.config` settings. Explicit model/reasoning overrides can be forwarded when the host's spawn tool supports them.
+For individual roles, ask Codex in ordinary language, for example `Have scout locate the billing implementation and its project rules` or `Have bughunter diagnose this failure and return an implementation handoff`. There is no kit-specific slash command for a role. In the tested WSL 0.154 host, named-role selection was unavailable. The macOS tester subsequently reported direct scout selection through `agent_type: "scout"`, without fallback. On the WSL host, the loop instead supplied the installed role instructions to a child. This fallback inherits the parent's sandbox and skill availability; it cannot apply role-level sandbox or `skills.config` settings. Explicit model/reasoning overrides can be forwarded when the host's spawn tool supports them.
 
 ## Customize
 
