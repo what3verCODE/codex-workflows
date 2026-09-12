@@ -60,7 +60,10 @@ class BootstrapTests(unittest.TestCase):
             personal = dest / ".agents/skills/personal/SKILL.md"
             personal.parent.mkdir()
             personal.write_text("Keep")
-            second = subprocess.run(command, input=script, env=env, capture_output=True, text=True)
+            # A bare --workspace must target the caller's cwd, not the
+            # temporary directory containing the downloaded installer.
+            second = subprocess.run(["sh", "-s", "--", "--workspace"], cwd=dest,
+                                    input=script, env=env, capture_output=True, text=True)
             self.assertEqual(second.returncode, 0, second.stderr)
             self.assertIn("Authoritative", installed.read_text())
             self.assertEqual(personal.read_text(), "Keep")

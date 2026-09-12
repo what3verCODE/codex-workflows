@@ -12,11 +12,13 @@ curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/s
 
 Run the same command again to update to the published kit. No repository clone, Git, Make or preinstalled Python is required. The installer uses an existing Python 3.11+ when available; otherwise it downloads temporary uv and Python tools and removes them afterward. It leaves shell profiles unchanged using uv's [unmanaged installation mode](https://docs.astral.sh/uv/reference/installer/#unmanaged-installations). This installs the workflow kit for your existing Codex installation.
 
-For a workspace installation:
+To install into your current working directory:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/setup.sh | sh -s -- --workspace "/path/to/workspace"
+curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/setup.sh | sh -s -- --workspace
 ```
+
+You can still supply an explicit destination with `--workspace "/path/to/workspace"`. Both forms install skills and roles beneath the selected workspace.
 
 To pin a version, use that tag or commit in both the script URL and `CODEX_WORKFLOW_REF` on the receiving shell. The script needs `curl`, `tar` and `mktemp`, provided by typical macOS and WSL installations. Advanced archive mirrors can set `CODEX_WORKFLOW_ARCHIVE_URL`; use only a source you trust to execute installer code.
 

@@ -5,7 +5,8 @@ main() {
     case "${1:-}" in
         -h|--help)
             echo 'Install globally: curl -fsSL <installer-url> | sh'
-            echo 'Install a workspace: curl -fsSL <installer-url> | sh -s -- --workspace "/path"'
+            echo 'Install in the current directory: curl -fsSL <installer-url> | sh -s -- --workspace'
+            echo 'An optional path after --workspace selects another directory.'
             echo 'Re-run the same command to update. CODEX_WORKFLOW_REF selects a revision, default main.'
             return
             ;;

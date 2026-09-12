@@ -118,7 +118,8 @@ def install(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     scope = parser.add_mutually_exclusive_group(required=True)
-    scope.add_argument("--workspace", type=Path)
+    scope.add_argument("--workspace", type=Path, nargs="?", const=Path("."),
+                       help="Install at PATH, or the current working directory when omitted")
     scope.add_argument("--global", dest="global_install", action="store_true")
     parser.add_argument("--home", type=Path, default=Path.home(), help="Global skill home, default: user's home")
     parser.add_argument("--codex-home", type=Path, help="Global agent home, default: CODEX_HOME or HOME/.codex")
