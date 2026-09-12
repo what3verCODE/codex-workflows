@@ -42,6 +42,10 @@ Each local fork has `upstream.json` with repository, path, revision and the prev
 
 `workflow-context`, `prepared-task`, `workflow-writing`, `development-loop`, the TOML roles, installer and evaluation tooling are original kit material derived from this project's specification.
 
+`council-mode` is an original kit implementation informed by [nicobailon/pi-subagents council-mode](https://github.com/nicobailon/pi-subagents/blob/main/skills/council-mode/SKILL.md), inspected on 2026-09-12. It adopts independent assessments, curated challenges and bounded decision advice. Its instructions are written for the kit's standalone open-question workflow and reusable `advisor` role. It does not vendor Pi code, execution-control references or agent profiles.
+
+The five thinking styles follow the roster in [okjpg/llm-council](https://github.com/okjpg/llm-council), inspected on 2026-09-12. The kit supplies its own style instructions and gives every advisor the essential decision context. It retains curated challenges rather than adopting that adaptation's anonymous full peer review or HTML transcript output. Karpathy's original [llm-council](https://github.com/karpathy/llm-council) uses different models; the kit's five styles do not claim equivalent model diversity.
+
 To update a fork, compare its recorded revision with the desired upstream revision, retain relevant changes, and revise its `upstream.json`, manifest entry and this table together. To update a downloaded skill, change its immutable revision and all file hashes together. Never replace a commit with `main` or interpret a successful TOML parse as runtime compatibility evidence.
 
 ## VCS-neutral workflow adaptations

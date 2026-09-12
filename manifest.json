@@ -372,6 +372,11 @@
         "adaptations": "See PROVENANCE.md for the maintained changes.",
         "previousInstalledHash": "91670f6f5239fc64da91c2b2f6ada62a27d2f0e8e18215fefe53feeea7a43801"
       }
+    },
+    {
+      "name": "council-mode",
+      "kind": "local",
+      "path": "kit/skills/council-mode"
     }
   ],
   "agents": [
@@ -429,6 +434,11 @@
     {
       "name": "review_specialist",
       "path": "kit/agents/review_specialist.toml",
+      "skills": []
+    },
+    {
+      "name": "advisor",
+      "path": "kit/agents/advisor.toml",
       "skills": []
     }
   ]

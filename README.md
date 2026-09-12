@@ -76,6 +76,18 @@ $wayfinder map the open decisions for this larger effort
 
 Use `grill-me` for most plan discussions, `grill-with-docs` when you also want domain terminology and ADRs captured, and `wayfinder` when discovery spans multiple sessions and needs a map of decision tickets. They use `grilling` as shared questioning guidance. Wayfinder plans by default; implementation starts after the decisions are ready.
 
+For an open decision, start a standalone council consultation:
+
+```text
+$council-mode Which programming language should I use for this project? Here are my goals and constraints: ...
+```
+
+Council accepts questions without candidate answers. Five read-only advisors explore options independently, each using a stable thinking style: Contrarian, First-principles thinker, Expansionist, Outsider and Executor. All receive the same facts and constraints and may discover any viable options. The host can run them in batches when slots are limited; missing perspectives are reported as an incomplete council.
+
+Advisors then challenge material disagreements or shared unsupported assumptions when evidence could resolve them. The main agent returns a recommendation, alternatives, assumptions and unresolved decisions. It normally stops after at most two passes; a third requires your request and a remaining factual question that could affect the recommendation. These are behavioral limits, like the development loop's review cap.
+
+You can use council in a separate session while grilling a plan. Bring the question, project facts, constraints and open points from that conversation; no prior grilling session or ticket is required. Council asks for essential missing context and returns a self-contained brief you can paste back into planning. It does not start implementation or adopt a decision for you.
+
 Turn the agreed outcome into a specification and implementation tickets:
 
 ```text
@@ -121,6 +133,7 @@ Edit `kit/agents/*.toml` for role behavior, `model` and `model_reasoning_effort`
 | --- | --- | --- |
 | scout | `gpt-5.6-terra` | medium |
 | oracle | `gpt-6-astra` | medium |
+| advisor | `gpt-6-astra` | medium |
 | worker | `gpt-5.6-terra` | high |
 | bughunter | `gpt-6-astra` | high |
 | writer | `gpt-5.6-sol` | medium |
