@@ -25,7 +25,7 @@ Workspace installation writes `.agents/skills/<name>` and `.codex/agents/<name>.
 
 `make update` and `make update-global` reinstall the current source and pinned requirements. They do not fetch new kit revisions. Obtain the desired repository revision first, edit its sources if needed, then run the matching update target.
 
-The manifest declares ownership of the named skill directories and role files. Reinstall overwrites those managed files, including local modifications and stale files within a managed skill. It preserves other skills, role files, personal configuration, credentials and policy. Removing a manifest requirement stops installing it and does not delete its old destination. Symlink destinations are rejected rather than followed. All downloads and configurations are checked before destination changes; installation is not a transaction across every destination.
+The manifest declares ownership of the named skill directories and role files. Reinstall overwrites those managed files, including local modifications and stale files within a managed skill. It preserves other skills, role files, personal configuration, credentials and policy. Removing a manifest requirement stops installing it and does not delete its old destination. Explicit destination roots are resolved to their canonical paths. Symlinks beneath those roots are rejected rather than followed. All downloads and configurations are checked before destination changes; installation is not a transaction across every destination.
 
 ## Use the workflow
 

@@ -49,3 +49,7 @@ Thread limits required reuse of existing evaluator contexts for some specialists
 ## Issue status
 
 The implementation covers the installer, discovery guidance, setup-free preparation, readiness/TDD/checkpoints, diagnosis handoff, combined review, documentation and development loop requested in #2–#9. GitHub issues remain open because native role activation and several requested environment/behavioral checks above are still unverified. The kit does not claim complete acceptance on the strength of prompt text or stub evaluations alone.
+
+## Source review
+
+Two independent reviewers inspected the complete `bdef69b..5b0e0e8` source change. [Specification review](evaluations/source-specification.md) found no actionable defect or unrequested fork changes. [Technical review](evaluations/source-technical.md) covered the remaining categories and found one P2 documentation contract mismatch: the installer resolves an explicitly supplied root alias before rejecting symlinks beneath it, while the README had claimed blanket symlink rejection. The README now describes the actual boundary. Generated whitespace was also cleaned up. The original source baseline remains fixed for the correction review.
