@@ -2,6 +2,24 @@
 
 Install editable Codex roles and skills, then run one ticket through discovery, implementation, documentation, checkpoint commits and at most two review rounds.
 
+## Install with one command
+
+Once `setup.sh` is published on `main`, install globally with:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/setup.sh | sh
+```
+
+Run the same command again to update to the published kit. No repository clone, Git, Make or preinstalled Python is required. The installer uses an existing Python 3.11+ when available; otherwise it downloads temporary uv and Python tools and removes them afterward. It leaves shell profiles unchanged using uv's [unmanaged installation mode](https://docs.astral.sh/uv/reference/installer/#unmanaged-installations). This installs the workflow kit for your existing Codex installation.
+
+For a workspace installation:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/what3verCODE/codex-workflows/main/setup.sh | sh -s -- --workspace "/path/to/workspace"
+```
+
+To pin a version, use that tag or commit in both the script URL and `CODEX_WORKFLOW_REF` on the receiving shell. The script needs `curl`, `tar` and `mktemp`, provided by typical macOS and WSL installations. Advanced archive mirrors can set `CODEX_WORKFLOW_ARCHIVE_URL`; use only a source you trust to execute installer code.
+
 ## Manage the kit
 
 Run `make` to see the available commands. Use this repository as the place to edit and update the kit.
@@ -19,7 +37,7 @@ make diff-upstream                   # Inspect every maintained fork change
 make run TICKET="TICKET-42"           # Open Codex with the loop
 ```
 
-Installation needs Make and Python 3.11 or newer, plus HTTPS access to the pinned GitHub skill sources. macOS users can obtain Make through Command Line Tools and Python through their usual package manager. WSL Ubuntu/Debian users need `make` and a supported `python3`. The scripts use the standard library and require no package installation. `make fixtures` additionally needs Git to create disposable evaluation repositories. Installation destinations need neither Git nor a clone of this repository. You can run Make from a downloaded source archive.
+The repository Make commands need Make and Python 3.11 or newer, plus HTTPS access to the pinned GitHub skill sources. macOS users can obtain Make through Command Line Tools and Python through their usual package manager. WSL Ubuntu/Debian users need `make` and a supported `python3`. The scripts use the standard library and require no package installation. `make fixtures` additionally needs Git to create disposable evaluation repositories. Installation destinations need neither Git nor a clone of this repository. You can run Make from a downloaded source archive.
 
 Workspace installation writes `.agents/skills/<name>` and `.codex/agents/<name>.toml` beneath `WORKSPACE`. Start Codex from that workspace root when working across services. Global installation writes skills to `~/.agents/skills` and roles to `$CODEX_HOME/agents`, falling back to `~/.codex/agents`. `INSTALL_HOME` and `CODEX_DIR` override those global destinations for testing or nonstandard layouts.
 

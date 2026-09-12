@@ -1,5 +1,11 @@
 # Validation evidence
 
+## One-command setup
+
+The root `setup.sh` supports download-and-pipe installation, defaulting to global installation and accepting `--workspace`. Seven integration tests now pass, including piped archive installation, reinstall preservation, the default global argument and failure before installer execution when the archive download fails.
+
+On WSL, an actual run forced the missing-Python path using a local archive of the committed kit. It downloaded uv 0.12.13 and CPython 3.12.14 into temporary directories, then downloaded the pinned upstream skills and installed thirteen skills and seven agents into `/tmp/workflow bootstrap runtime`. The temporary tool directory was removed after completion. This verifies the fallback with real downloads; it does not claim a macOS run or availability of the public `main/setup.sh` URL before publication.
+
 Recorded 2026-09-12. The source baseline is `bdef69b`, the initial specification/lock commit. Findings below distinguish deterministic checks from observed model behavior.
 
 ## Installer and source checks
