@@ -29,7 +29,8 @@ def main():
         for relative in re.findall(r"\.\./([a-z0-9-]+)/SKILL\.md", text):
             if relative not in names:
                 raise ValueError(f"undeclared skill reference: {relative}")
-        for reference in re.findall(r"\]\(([^)]+)\)", text):
+        prose = re.sub(r"^```[^\n]*\n.*?^```[ \t]*$", "", text, flags=re.M | re.S)
+        for reference in re.findall(r"\]\(([^)]+)\)", prose):
             if "://" not in reference and not reference.startswith("#") and not (path.parent / reference.split("#")[0]).exists():
                 raise ValueError(f"broken reference {reference} in {path}")
     for entry in manifest["agents"]:

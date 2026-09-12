@@ -1,5 +1,9 @@
 # Validation evidence
 
+## Task discovery entry skills
+
+The kit now includes `grill-me`, `grill-with-docs` and `wayfinder`, plus their domain-modeling, research and prototype dependencies. `make check` passed all seven integration tests and validated 19 skills and seven roles. `make smoke` installed and discovered all 19 skills on WSL with Codex 0.154.0. The three entry skills retain their upstream explicit-invocation policies. These checks verify installation and discovery; the new entry skills have not undergone behavioral evaluation in this kit.
+
 ## One-command setup
 
 The root `setup.sh` supports download-and-pipe installation, defaulting to global installation and accepting `--workspace`. Seven integration tests now pass, including piped archive installation, reinstall preservation, the default global argument and failure before installer execution when the archive download fails.

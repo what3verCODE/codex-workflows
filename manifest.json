@@ -168,6 +168,143 @@
       "name": "development-loop",
       "kind": "local",
       "path": "kit/skills/development-loop"
+    },
+    {
+      "name": "grill-me",
+      "kind": "local",
+      "path": "kit/skills/grill-me",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/productivity/grill-me",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "9cdbb4b8f7a3aeaef82e6230c9e823500d4a8a1214c726cf342cf9829d34fc7d",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "grill-with-docs",
+      "kind": "local",
+      "path": "kit/skills/grill-with-docs",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/grill-with-docs",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "35e62aa423aaeab6a414bcac273f56dfb17802ef2334b41b6a3b00f28196c8cf",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "wayfinder",
+      "kind": "local",
+      "path": "kit/skills/wayfinder",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/wayfinder",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "fa790eb4255b13d24d7e33ff4891ccd3d621558cc0ab87ae226777538ea16a8f",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "domain-modeling",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/domain-modeling",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "a11713c0ff7870efa3c331b2e273f09116158485246edc89ae5088eefd1b0b48"
+      },
+      "files": [
+        {
+          "path": "ADR-FORMAT.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/domain-modeling/ADR-FORMAT.md",
+          "sha256": "944c92aa790e8fbdc9199640b170979abb8a34ba8d0fe18c2a01a63bce140ca0"
+        },
+        {
+          "path": "CONTEXT-FORMAT.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/domain-modeling/CONTEXT-FORMAT.md",
+          "sha256": "17ab16ce783e4d2801ee52fd9acdf550cbf44de65ae76797a93943bbedf22a13"
+        },
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/domain-modeling/SKILL.md",
+          "sha256": "327a2b50620e2fd70abc6893cd6965e76b20f8d0adb0dc2c8d5eb3845efb643e"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/domain-modeling/agents/openai.yaml",
+          "sha256": "f6bf2aa996c6e6f53fdd0708e18a0d16a56aed8322cca59fedbe3c0d2c75f06b"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+        }
+      ]
+    },
+    {
+      "name": "research",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/research",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "c8c1cba327a6f824b554cd978079a3dadd7406d73174f8fb9bfef58824691970"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/research/SKILL.md",
+          "sha256": "985569f15739c713d6784887c3d186d4ef9ac85bec5ad9c068d25bf0739928e4"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/research/agents/openai.yaml",
+          "sha256": "9b4c470d63221c1f68f22df70b83e2f12401b317babe0d1b7b5f24a974474d0d"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+        }
+      ]
+    },
+    {
+      "name": "prototype",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/prototype",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "d3fc74689bd993e39c44bfae510d014eecffbeec2922764b065377fd1327c0f6"
+      },
+      "files": [
+        {
+          "path": "LOGIC.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/LOGIC.md",
+          "sha256": "f61c7d249e786a79ef289018901c348271e1798dd0b0bc5607b5c6f4d4a01ab9"
+        },
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/SKILL.md",
+          "sha256": "714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3"
+        },
+        {
+          "path": "UI.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/UI.md",
+          "sha256": "723211e878acbc7b6ff09755263f3295cde724ba902ff0064da41eed51d45ad3"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/agents/openai.yaml",
+          "sha256": "5af65e43ab41a350436697b81e27b7f848d36782043b73c322bb2c9fa9cc55dc"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+        }
+      ]
     }
   ],
   "agents": [

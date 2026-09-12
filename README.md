@@ -66,10 +66,19 @@ The loop reads the ticket and comments using available tracker tools. Scouts fin
 
 The coordinator preserves existing edits, follows each project's VCS and branch conventions, and records original baselines in the conversation. It checkpoints completed work before review. Reviewer combines independent analyses of the complete ticket change. If corrections are needed, the loop updates code and docs, checkpoints them and reviews once more against the original baselines. It stops after the second review and reports remaining findings. These are instructions followed by the model, not runtime-enforced counters or guarantees. Manual UI validation remains yours.
 
-Preparation skills remain directly usable:
+Start task discovery with one of these installed entry skills:
 
 ```text
-$grilling assess this plan
+$grill-me assess this plan
+$grill-with-docs sharpen this design and record the glossary and decisions
+$wayfinder map the open decisions for this larger effort
+```
+
+Use `grill-me` for most plan discussions, `grill-with-docs` when you also want domain terminology and ADRs captured, and `wayfinder` when discovery spans multiple sessions and needs a map of decision tickets. They use `grilling` as shared questioning guidance. Wayfinder plans by default; implementation starts after the decisions are ready.
+
+Turn the agreed outcome into a specification and implementation tickets:
+
+```text
 $to-spec into https://tracker.example/issues/17
 $to-spec as new issue in the current repository
 $to-tickets split the agreed spec into tracer-bullet tickets
