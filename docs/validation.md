@@ -22,7 +22,7 @@ An actual `make install WORKSPACE="/tmp/workflow installed kit"` downloaded all 
 | --- | --- |
 | WSL2, Codex 0.154.0 | Actual installation and runtime skill discovery passed. A live bounded scout used the role-instruction fallback because the host's spawn tool had no named-role selector. |
 | WSL2, Codex 0.153.4 | Cached installed binary ran the skill-discovery smoke check successfully. This is 0.153.4 evidence, not a run of 0.153.0. |
-| macOS, either version | Not exercised. No macOS environment was available. |
+| macOS, user-reported test | Public test-branch installer returned thirteen skills and seven roles. Codex prompt discovery included development-loop. The scout reported direct selection through `agent_type: "scout"`, no TOML fallback and no file edits. Exact CLI version and tool trace were not captured. |
 
 WSL kernel was `6.18.33.2-microsoft-standard-WSL2`, x86_64 with glibc 2.39; Python was 3.12.3. `make smoke` creates a temporary installation and Codex home, reads the actual `skills/list` app-server result, and checks the model-visible prompt for the installed development-loop skill. `CODEX_BIN` selects another installed binary without replacing the user's runtime. User-level skills can remain visible despite a temporary Codex home; the smoke test filters exact installation paths.
 
@@ -50,7 +50,7 @@ Disposable repositories and a JSON tracker stub were created outside the source 
 
 Code evaluations completed one combined review round with no blocking findings across the four final code checkpoints. Reviews accounted for all requested categories, marking UI accessibility inapplicable and unavailable visual/TMS evidence accurately. The correction scenario deliberately retained a defect to exercise the second-round stop. This was a controlled worker shortfall, not a naturally observed error rate. Its final P2 was left in the disposable fixture as intended; it is not a defect shipped in the installer.
 
-Thread limits required reuse of existing evaluator contexts for some specialists. Reviews were independent of the relevant implementation authors, but this does not fully verify fresh specialist dispatch. The diagnosis evaluator saw source before establishing its first red reproducer, so that run is not a blind diagnosis evaluation. Clarification and ambiguous-destination checks did not include a real human reply/resumption. Live tracker/MCP operations, bounded MCP retrieval, non-Git VCS execution, manual UI validation and macOS checks were not exercised. Raw evaluation reports retain these limits and observations from before the later upstream audit; they are historical evidence, not current skill instructions.
+Thread limits required reuse of existing evaluator contexts for some specialists. Reviews were independent of the relevant implementation authors, but this does not fully verify fresh specialist dispatch. The diagnosis evaluator saw source before establishing its first red reproducer, so that run is not a blind diagnosis evaluation. Clarification and ambiguous-destination checks did not include a real human reply/resumption. Live tracker/MCP operations, bounded MCP retrieval, non-Git VCS execution and manual UI validation were not exercised. The later macOS checks are user-reported in the matrix above. Raw evaluation reports retain these limits and observations from before the later upstream audit; they are historical evidence, not current skill instructions.
 
 ## Issue status
 
@@ -59,3 +59,7 @@ The implementation covers the installer, discovery guidance, setup-free preparat
 ## Source review
 
 Two independent reviewers inspected the complete `bdef69b..5b0e0e8` source change. [Specification review](evaluations/source-specification.md) found no actionable defect or unrequested fork changes. [Technical review](evaluations/source-technical.md) covered the remaining categories and found one P2 documentation contract mismatch: the installer resolves an explicitly supplied root alias before rejecting symlinks beneath it, while the README had claimed blanket symlink rejection. The README now describes the actual boundary. Generated whitespace was also cleaned up. The original source baseline remains fixed for the correction review.
+
+## Documentation-only unslop scope
+
+The macOS scout test exposed the upstream unslop description, which required application to every answer. The kit now maintains a fork changing only that description to documentation and memory-bank writing. Reviewer no longer requires unslop unconditionally. Routine answers, status updates and scout reports do not activate it. Upstream cleanup rules are unchanged. Existing independent user/global installations can still expose their own unslop instructions; the kit does not overwrite unrelated installations.

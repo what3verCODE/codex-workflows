@@ -75,15 +75,17 @@ $to-tickets split the agreed spec into tracer-bullet tickets
 
 Existing-ticket requests update the relevant specification after reading the ticket and preserve unrelated content and discussion. New-issue requests create a new issue in the resolved destination. Drafts do not publish automatically. No tracker setup document or readiness label is required.
 
-For individual roles, ask Codex in ordinary language, for example `Have scout locate the billing implementation and its project rules` or `Have bughunter diagnose this failure and return an implementation handoff`. There is no kit-specific slash command for a role. In the tested 0.154 host, named-role selection was unavailable. The loop instead supplied the installed role instructions to a child. This fallback inherits the parent's sandbox and skill availability; it cannot apply role-level sandbox or `skills.config` settings. Explicit model/reasoning overrides can be forwarded when the host's spawn tool supports them.
+For individual roles, ask Codex in ordinary language, for example `Have scout locate the billing implementation and its project rules` or `Have bughunter diagnose this failure and return an implementation handoff`. There is no kit-specific slash command for a role. In the tested WSL 0.154 host, named-role selection was unavailable. The macOS tester subsequently reported direct scout selection through `agent_type: "scout"`, without fallback. The loop instead supplied the installed role instructions to a child. This fallback inherits the parent's sandbox and skill availability; it cannot apply role-level sandbox or `skills.config` settings. Explicit model/reasoning overrides can be forwarded when the host's spawn tool supports them.
 
 ## Customize
 
 Edit `kit/agents/*.toml` for role behavior and optional `model` and `model_reasoning_effort` overrides. Defaults inherit the parent settings, so the kit makes no unverified model assignment. Check your runtime's available models before adding an override. Edit `manifest.json` to change required skills for a role, add upstream requirements, or select local forks. The installer adds supported `skills.config` entries with resolved skill paths. Required-skill instructions guide behavior; they do not guarantee exclusion of other skills or tools.
 
+Unslop applies to documentation and memory-bank writing, not routine answers, scout findings or agent reports. Its original cleanup rules are preserved.
+
 Edit maintained skill instructions under `kit/skills`. `.agents/` and `.codex/` are generated installation directories and are ignored in this repository. Upstream revisions, changes and licenses are documented in [PROVENANCE.md](PROVENANCE.md).
 
-`make diff-upstream` reads each fork's pinned revision and prints changes to every upstream file, including supporting files and invocation metadata. It does not edit the kit. For an offline comparison, use `make diff-upstream UPSTREAM_CHECKOUT="/path/to/mattpocock/skills"` with that checkout at the recorded revision. The comparison reads committed upstream objects, so local edits in that checkout cannot change the reference.
+`make diff-upstream` reads each fork's pinned revision and prints changes to every upstream file, including supporting files and invocation metadata. It does not edit the kit. For an offline comparison, use `make diff-upstream UPSTREAM_CHECKOUT="/path/to/mattpocock/skills" POTETO_CHECKOUT="/path/to/poteto/plugins"` with both checkouts at their recorded revisions. The comparison reads committed upstream objects, so local edits in that checkout cannot change the reference.
 
 ## Compatibility and evidence
 

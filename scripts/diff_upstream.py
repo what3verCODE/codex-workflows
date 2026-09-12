@@ -11,10 +11,16 @@ import urllib.request
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkout", type=Path, help="Use an existing upstream checkout at the recorded revision")
+    parser.add_argument("--checkout", type=Path, action="append", default=[], help="Use upstream checkouts at recorded revisions; repeat for multiple sources")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     manifest = json.loads((root / "manifest.json").read_text())
+    checkouts = {}
+    if args.checkout:
+        import subprocess
+        for checkout in args.checkout:
+            revision = subprocess.check_output(["git", "-C", str(checkout), "rev-parse", "HEAD"], text=True).strip()
+            checkouts[revision] = checkout
     for entry in manifest["skills"]:
         if entry["kind"] != "local" or "upstream" not in entry:
             continue
@@ -23,15 +29,14 @@ def main():
         revision = origin["revision"]
         print(f"\n# {entry['name']} against {repo}@{revision}")
         if args.checkout:
-            import subprocess
-            actual = subprocess.check_output(["git", "-C", str(args.checkout), "rev-parse", "HEAD"], text=True).strip()
-            if actual != revision:
-                raise ValueError(f"checkout revision {actual} does not match {revision}")
-            paths = subprocess.check_output(["git", "-C", str(args.checkout), "ls-tree", "-r", "--name-only",
+            if revision not in checkouts:
+                raise ValueError(f"provide another --checkout for {repo}@{revision}")
+            checkout = checkouts[revision]
+            paths = subprocess.check_output(["git", "-C", str(checkout), "ls-tree", "-r", "--name-only",
                                              revision, "--", origin["path"]], text=True).splitlines()
             prefix = origin["path"] + "/"
             originals = {path[len(prefix):]: subprocess.check_output(
-                ["git", "-C", str(args.checkout), "show", f"{revision}:{path}"]) for path in paths}
+                ["git", "-C", str(checkout), "show", f"{revision}:{path}"]) for path in paths}
         else:
             request = urllib.request.Request(f"https://api.github.com/repos/{repo}/git/trees/{revision}?recursive=1",
                                              headers={"User-Agent": "codex-workflow-upstream-diff"})

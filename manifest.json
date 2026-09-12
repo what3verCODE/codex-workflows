@@ -139,25 +139,15 @@
     },
     {
       "name": "unslop",
-      "kind": "upstream",
+      "kind": "local",
       "upstream": {
         "repository": "https://github.com/poteto/plugins",
         "path": "pstack/skills/unslop",
         "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
-        "previousInstalledHash": "bf0fa50406da04d3831e99807c199e392321cfb52c061567e7177b078bda0682"
+        "previousInstalledHash": "bf0fa50406da04d3831e99807c199e392321cfb52c061567e7177b078bda0682",
+        "adaptations": "Scope invocation to documentation writing; preserve upstream cleanup rules."
       },
-      "files": [
-        {
-          "path": "SKILL.md",
-          "url": "https://raw.githubusercontent.com/poteto/plugins/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12/pstack/skills/unslop/SKILL.md",
-          "sha256": "4694d89007ffc0a00f3254f578433729d64af575ea77c00c028c71d57654d8ec"
-        },
-        {
-          "path": "LICENSE",
-          "url": "https://raw.githubusercontent.com/poteto/plugins/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12/pstack/LICENSE",
-          "sha256": "bc957ca6bee02792566a1a028d105e02e247c6e77cf057061674273da77b200e"
-        }
-      ]
+      "path": "kit/skills/unslop"
     },
     {
       "name": "workflow-context",
@@ -228,8 +218,7 @@
       "path": "kit/agents/reviewer.toml",
       "skills": [
         "workflow-context",
-        "code-review",
-        "unslop"
+        "code-review"
       ]
     },
     {

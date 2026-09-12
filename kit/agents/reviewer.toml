@@ -2,5 +2,5 @@
 # Set model and model_reasoning_effort here after checking your runtime catalog.
 name = "reviewer"
 description = "Coordinate one independent review round of a complete fixed task change."
-developer_instructions = "Read code-review and coordinate its independent specialists against the supplied original baselines and checkpoints. Use fresh review context. Consolidate duplicates retaining category origins and account for every category. Return evidence, severity, blockers and limits. Do not implement fixes or recursively launch coordinating reviewers.\nRequired skill files: {{skills_root}}/workflow-context/SKILL.md, {{skills_root}}/code-review/SKILL.md, {{skills_root}}/unslop/SKILL.md."
+developer_instructions = "Read code-review and coordinate its independent specialists against the supplied original baselines and checkpoints. Use fresh review context. Consolidate duplicates retaining category origins and account for every category. Return evidence, severity, blockers and limits. Do not implement fixes or recursively launch coordinating reviewers.\nRequired skill files: {{skills_root}}/workflow-context/SKILL.md, {{skills_root}}/code-review/SKILL.md."
 sandbox_mode = "read-only"

@@ -6,11 +6,12 @@ CODEX_DIR ?= $(if $(CODEX_HOME),$(CODEX_HOME),$(INSTALL_HOME)/.codex)
 EVAL_DIR ?= /tmp/codex-workflow-evaluation
 CODEX_BIN ?= codex
 UPSTREAM_CHECKOUT ?=
+POTETO_CHECKOUT ?=
 TICKET ?=
 INSTRUCTIONS ?=
 override TICKET := $(value TICKET)
 override INSTRUCTIONS := $(value INSTRUCTIONS)
-export PYTHON WORKSPACE INSTALL_HOME CODEX_DIR EVAL_DIR CODEX_BIN UPSTREAM_CHECKOUT TICKET INSTRUCTIONS
+export PYTHON WORKSPACE INSTALL_HOME CODEX_DIR EVAL_DIR CODEX_BIN UPSTREAM_CHECKOUT POTETO_CHECKOUT TICKET INSTRUCTIONS
 
 .PHONY: help install update install-global update-global test check smoke fixtures diff-upstream run
 help:
@@ -45,7 +46,7 @@ fixtures:
 	@"$$PYTHON" scripts/fixtures.py "$$EVAL_DIR"
 
 diff-upstream:
-	@if [ -n "$$UPSTREAM_CHECKOUT" ]; then "$$PYTHON" scripts/diff_upstream.py --checkout "$$UPSTREAM_CHECKOUT"; else "$$PYTHON" scripts/diff_upstream.py; fi
+	@set --; if [ -n "$$UPSTREAM_CHECKOUT" ]; then set -- "$$@" --checkout "$$UPSTREAM_CHECKOUT"; fi; if [ -n "$$POTETO_CHECKOUT" ]; then set -- "$$@" --checkout "$$POTETO_CHECKOUT"; fi; "$$PYTHON" scripts/diff_upstream.py "$$@"
 
 run:
 	@test -n "$$TICKET" || { echo 'Provide TICKET="URL-or-ID" and optional INSTRUCTIONS="...".' >&2; exit 1; }
