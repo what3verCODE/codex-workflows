@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "tdd",
+      "kind": "local",
+      "path": "kit/skills/tdd",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/tdd",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "e753a5da75292bbe59d302d89566bc2c53d0e73944da2f0e944a7578883c07d0",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "diagnosing-bugs",
+      "kind": "local",
+      "path": "kit/skills/diagnosing-bugs",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/diagnosing-bugs",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "37b5e9c624513551da790b52864dc8c84bff996a6d03a380cc6facdcc0a88354",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "code-review",
+      "kind": "local",
+      "path": "kit/skills/code-review",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/code-review",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "caa9a086baaf9e0f7cd71f64edfa83da6821c05e826b083221f3d02e3d6a1905",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "to-spec",
+      "kind": "local",
+      "path": "kit/skills/to-spec",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/to-spec",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "3fa1a0695d4ea242fae9e569e4d22aa1788623197abb33bfadafae7315789bbf",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "to-tickets",
+      "kind": "local",
+      "path": "kit/skills/to-tickets",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/to-tickets",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "bf5e6ebcb4f1272de0c188d5b3901f265a03d1fa9935a21a7a56938e21e2e761",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "writing-for-agents",
+      "kind": "local",
+      "path": "kit/skills/writing-for-agents",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/productivity/writing-for-agents",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f",
+        "adaptations": "See PROVENANCE.md for the maintained changes."
+      }
+    },
+    {
+      "name": "grilling",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/productivity/grilling",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "4dd886b0196bf43729d954ae326016f2bd9f5f79d892500b407c33a753362f14"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/grilling/SKILL.md",
+          "sha256": "10ff989e7498b23b5acb49d5048f11dcd906757d2f79c5cdf8a00001381296f2"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/grilling/agents/openai.yaml",
+          "sha256": "1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+        }
+      ]
+    },
+    {
+      "name": "codebase-design",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/mattpocock/skills",
+        "path": "skills/engineering/codebase-design",
+        "revision": "3cca18b368ae95cdbdebbff572ccafa662551015",
+        "previousInstalledHash": "5a17552cc1482f1a40124bf4e6c9dbd90ac0dbb47e71c07d47369f9e5f2ae3b5"
+      },
+      "files": [
+        {
+          "path": "DEEPENING.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/codebase-design/DEEPENING.md",
+          "sha256": "f3dd099ce99289bd213914d8ee3e2429b78309c3957ca4583f7659551b1d53c1"
+        },
+        {
+          "path": "DESIGN-IT-TWICE.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/codebase-design/DESIGN-IT-TWICE.md",
+          "sha256": "8e740bf98446dbd4dfdc132ac4346d9a7eedaf93de6a495889171cf7f99f16bd"
+        },
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/codebase-design/SKILL.md",
+          "sha256": "2c20617f87ec8af6a434859f381b2f061a69b530444e74eb39e78bb016a6d1e2"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/codebase-design/agents/openai.yaml",
+          "sha256": "edebc9e4fcfe102114012575eaa9600b9b5fd08c311664f389c36e7bc717740f"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/mattpocock/skills/3cca18b368ae95cdbdebbff572ccafa662551015/LICENSE",
+          "sha256": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5"
+        }
+      ]
+    },
+    {
+      "name": "unslop",
+      "kind": "upstream",
+      "upstream": {
+        "repository": "https://github.com/poteto/plugins",
+        "path": "pstack/skills/unslop",
+        "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+        "previousInstalledHash": "bf0fa50406da04d3831e99807c199e392321cfb52c061567e7177b078bda0682"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/poteto/plugins/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12/pstack/skills/unslop/SKILL.md",
+          "sha256": "4694d89007ffc0a00f3254f578433729d64af575ea77c00c028c71d57654d8ec"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/poteto/plugins/74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12/pstack/LICENSE",
+          "sha256": "bc957ca6bee02792566a1a028d105e02e247c6e77cf057061674273da77b200e"
+        }
+      ]
+    },
+    {
+      "name": "workflow-context",
+      "kind": "local",
+      "path": "kit/skills/workflow-context"
+    },
+    {
+      "name": "prepared-task",
+      "kind": "local",
+      "path": "kit/skills/prepared-task"
+    },
+    {
+      "name": "workflow-writing",
+      "kind": "local",
+      "path": "kit/skills/workflow-writing"
+    },
+    {
+      "name": "development-loop",
+      "kind": "local",
+      "path": "kit/skills/development-loop"
+    }
+  ],
+  "agents": [
+    {
+      "name": "scout",
+      "path": "kit/agents/scout.toml",
+      "skills": [
+        "workflow-context"
+      ]
+    },
+    {
+      "name": "oracle",
+      "path": "kit/agents/oracle.toml",
+      "skills": [
+        "workflow-context",
+        "prepared-task"
+      ]
+    },
+    {
+      "name": "worker",
+      "path": "kit/agents/worker.toml",
+      "skills": [
+        "workflow-context",
+        "prepared-task",
+        "tdd",
+        "codebase-design"
+      ]
+    },
+    {
+      "name": "bughunter",
+      "path": "kit/agents/bughunter.toml",
+      "skills": [
+        "workflow-context",
+        "diagnosing-bugs"
+      ]
+    },
+    {
+      "name": "writer",
+      "path": "kit/agents/writer.toml",
+      "skills": [
+        "workflow-writing",
+        "unslop",
+        "writing-for-agents"
+      ]
+    },
+    {
+      "name": "reviewer",
+      "path": "kit/agents/reviewer.toml",
+      "skills": [
+        "workflow-context",
+        "code-review",
+        "unslop"
+      ]
+    },
+    {
+      "name": "review_specialist",
+      "path": "kit/agents/review_specialist.toml",
+      "skills": []
+    }
+  ]
+}
