@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "upstream": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "revision": "b0618bc436ad893b3c5e84e55fba86586d34a404",
+      "license": "MIT",
+      "skills": {
+        "code-review": "skills/engineering/code-review",
+        "codebase-design": "skills/engineering/codebase-design",
+        "diagnosing-bugs": "skills/engineering/diagnosing-bugs",
+        "domain-modeling": "skills/engineering/domain-modeling",
+        "grill-with-docs": "skills/engineering/grill-with-docs",
+        "improve-codebase-architecture": "skills/engineering/improve-codebase-architecture",
+        "pr": "skills/engineering/pr",
+        "prototype": "skills/engineering/prototype",
+        "research": "skills/engineering/research",
+        "retro": "skills/engineering/retro",
+        "setup-matt-pocock-skills": "skills/engineering/setup-matt-pocock-skills",
+        "tdd": "skills/engineering/tdd",
+        "to-spec": "skills/engineering/to-spec",
+        "to-tickets": "skills/engineering/to-tickets",
+        "wayfinder": "skills/engineering/wayfinder",
+        "grill-me": "skills/productivity/grill-me",
+        "grilling": "skills/productivity/grilling",
+        "handoff": "skills/productivity/handoff",
+        "writing-for-agents": "skills/productivity/writing-for-agents"
+      }
+    },
+    {
+      "repository": "https://github.com/poteto/plugins",
+      "revision": "74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12",
+      "license": "MIT",
+      "skills": {
+        "fix-merge-conflicts": "cursor-team-kit/skills/fix-merge-conflicts",
+        "unslop": "pstack/skills/unslop",
+        "verify-this": "cursor-team-kit/skills/verify-this",
+        "why": "pstack/skills/why"
+      }
+    },
+    {
+      "repository": "https://github.com/DietrichGebert/ponytail",
+      "revision": "9cc65d03aa2da1db7121b912d03596409ee340b8",
+      "license": "MIT",
+      "skills": {
+        "ponytail": "skills/ponytail",
+        "ponytail-audit": "skills/ponytail-audit",
+        "ponytail-debt": "skills/ponytail-debt",
+        "ponytail-review": "skills/ponytail-review"
+      }
+    }
+  ]
+}

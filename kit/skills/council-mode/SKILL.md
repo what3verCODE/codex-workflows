@@ -31,7 +31,7 @@ Use the host's available agent tools and concurrency slots, running independent 
 
 Advisors read relevant source and authoritative references themselves; verify changing technical claims against current primary sources. Distinguish evidence from inference and record inaccessible evidence. Multiple instances, styles or models do not by themselves prove diverse or correct reasoning.
 
-If named roles are unavailable, read the installed `advisor.toml` under workspace `.codex/agents` or global `$CODEX_HOME/agents` (default `~/.codex/agents`) and pass its instructions and assigned thinking style to a fresh child. Forward configured model/reasoning overrides only when supported. Disclose that this fallback inherits the parent's environment and cannot apply role-level sandbox or skill settings; retain the read-only task boundary. If fewer than five independent advisors complete, label the council incomplete and name the missing perspectives. If fewer than two complete, return a limited consultation and label it degraded. Do not present the parent's own perspectives as independent agents.
+If the host cannot select the `advisor` role by name, start a fresh general subagent, tell it to work read-only, and pass the same brief and thinking style. Say that this fallback does not enforce read-only access. If fewer than five independent advisors complete, label the council incomplete and name the missing perspectives. If fewer than two complete, return a limited consultation and label it degraded. Do not present the parent's own perspectives as independent agents.
 
 ## Assess and challenge
 

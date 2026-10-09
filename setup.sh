@@ -7,6 +7,7 @@ main() {
             echo 'Install globally: curl -fsSL <installer-url> | sh'
             echo 'Install in the current directory: curl -fsSL <installer-url> | sh -s -- --workspace'
             echo 'An optional path after --workspace selects another directory.'
+            echo 'Add --agent codex or --agent claude to install for one agent only (default: both).'
             echo 'Re-run the same command to update. CODEX_WORKFLOW_REF selects a revision, default main.'
             return
             ;;
@@ -22,17 +23,18 @@ main() {
     trap 'exit 1' HUP INT TERM
     bootstrap_ref=${CODEX_WORKFLOW_REF:-main}
     bootstrap_url=${CODEX_WORKFLOW_ARCHIVE_URL:-https://codeload.github.com/what3verCODE/codex-workflows/tar.gz/$bootstrap_ref}
-    echo "Downloading Codex workflow kit..."
+    echo "Downloading workflow kit..."
     curl -fsSL --retry 2 --connect-timeout 20 --max-time 180 "$bootstrap_url" -o "$bootstrap_tmp/kit.tar.gz"
     mkdir "$bootstrap_tmp/kit"
     tar -xzf "$bootstrap_tmp/kit.tar.gz" -C "$bootstrap_tmp/kit" --strip-components=1
-    test -f "$bootstrap_tmp/kit/scripts/install.py" && test -f "$bootstrap_tmp/kit/manifest.json" || {
-        echo 'Downloaded archive is missing the workflow installer or manifest.' >&2
+    test -f "$bootstrap_tmp/kit/scripts/install.py" && test -f "$bootstrap_tmp/kit/sources.json" || {
+        echo 'Downloaded archive is missing the workflow installer or sources.json.' >&2
         exit 1
     }
-    if [ "$#" -eq 0 ]; then
-        set -- --global
-    fi
+    case " $* " in
+        *" --workspace"*|*" --global "*) ;;
+        *) set -- --global "$@" ;;
+    esac
     bootstrap_python=${PYTHON:-python3}
     if command -v "$bootstrap_python" >/dev/null 2>&1 &&
         "$bootstrap_python" -c 'import sys; sys.exit(sys.version_info < (3, 11))' >/dev/null 2>&1; then
@@ -45,7 +47,7 @@ main() {
             "$bootstrap_tmp/uv/uv" run --no-config --no-project --python 3.12 --managed-python \
             "$bootstrap_tmp/kit/scripts/install.py" "$@"
     fi
-    echo 'Codex workflow kit installed. Restart Codex to load the skills and roles.'
+    echo 'Workflow kit installed. Restart your agent (Codex, Claude Code) to load skills and roles.'
 }
 
 main "$@"

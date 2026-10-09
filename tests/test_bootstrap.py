@@ -21,7 +21,7 @@ class BootstrapTests(unittest.TestCase):
             # Stub the destination installer boundary to observe defaults without
             # installing anything into the test runner's actual home.
             (source / "scripts/install.py").write_text("import sys\nprint('DESTINATION_ARGS=' + repr(sys.argv[1:]))\n")
-            (source / "manifest.json").write_text("{}")
+            (source / "sources.json").write_text("{}")
             archive = root / "kit.tar.gz"
             with tarfile.open(archive, "w:gz") as tar:
                 tar.add(source, arcname="kit-revision")
@@ -30,6 +30,8 @@ class BootstrapTests(unittest.TestCase):
             result = subprocess.run(["sh"], input=script, env=env, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("DESTINATION_ARGS=['--global']", result.stdout)
+            result = subprocess.run(["sh", "-s", "--", "--agent", "codex"], input=script, env=env, capture_output=True, text=True)
+            self.assertIn("DESTINATION_ARGS=['--global', '--agent', 'codex']", result.stdout)
             archive.unlink()
             result = subprocess.run(["sh"], input=script, env=env, capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
@@ -41,17 +43,17 @@ class BootstrapTests(unittest.TestCase):
             source = root / "source"
             (source / "scripts").mkdir(parents=True)
             shutil.copyfile(ROOT / "scripts/install.py", source / "scripts/install.py")
-            skill = source / "example"
-            skill.mkdir()
+            skill = source / "kit/skills/example"
+            skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("---\nname: example\ndescription: Fixture.\n---\nAuthoritative\n")
-            (source / "manifest.json").write_text(json.dumps({"version": 1, "skills": [
-                {"name": "example", "kind": "local", "path": "example"}], "agents": []}))
+            (source / "kit/agents").mkdir()
+            (source / "sources.json").write_text(json.dumps({"version": 2, "upstream": []}))
             archive = root / "kit.tar.gz"
             with tarfile.open(archive, "w:gz") as tar:
                 tar.add(source, arcname="kit-revision")
             dest = root / "workspace with spaces"
             env = dict(os.environ, CODEX_WORKFLOW_ARCHIVE_URL=archive.as_uri(), PYTHON=sys.executable)
-            command = ["sh", "-s", "--", "--workspace", str(dest)]
+            command = ["sh", "-s", "--", "--workspace", str(dest), "--agent", "codex"]
             script = (ROOT / "setup.sh").read_text()
             first = subprocess.run(command, input=script, env=env, capture_output=True, text=True)
             self.assertEqual(first.returncode, 0, first.stderr)
@@ -62,7 +64,7 @@ class BootstrapTests(unittest.TestCase):
             personal.write_text("Keep")
             # A bare --workspace must target the caller's cwd, not the
             # temporary directory containing the downloaded installer.
-            second = subprocess.run(["sh", "-s", "--", "--workspace"], cwd=dest,
+            second = subprocess.run(["sh", "-s", "--", "--workspace", "--agent", "codex"], cwd=dest,
                                     input=script, env=env, capture_output=True, text=True)
             self.assertEqual(second.returncode, 0, second.stderr)
             self.assertIn("Authoritative", installed.read_text())

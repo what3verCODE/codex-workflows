@@ -1,5 +1,7 @@
 .agents/
 .codex/
+.claude/skills/
+.claude/agents/
 __pycache__/
 *.pyc
 .DS_Store
