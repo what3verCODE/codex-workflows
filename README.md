@@ -39,6 +39,7 @@ If you install the plugin, the plugin's skills and the kit's copies are duplicat
 | Goal | Skill |
 | --- | --- |
 | Implement one ticket | `$dev-loop TICKET-42` |
+| Small, clear change, fast | `$fast-loop TICKET-42` |
 | Review a change | `$review since <baseline>` |
 | Sharpen a plan | `$grill-me`, `$grill-with-docs`, `$wayfinder` |
 | Decide between options | `$council-mode <question>` |
@@ -61,6 +62,10 @@ Claude Code uses `/name` instead of `$name`.
 3. Build with `ponytail` (smallest complete change) and `tdd`.
 4. Checkpoint, then `review`. Fix must/should findings, then review once more. Two rounds max.
 5. Report: changed files, checks actually run, open findings, baseline → checkpoint. The review-request description is drafted with `pr`.
+
+### fast-loop
+
+For tasks you already know are small. The main agent builds alone (no scout, plan or worker), makes a checkpoint, then runs the checks while one **reviewer** runs `ponytail-review` in parallel. Confirmed findings are fixed once, with no second review. Say "no review" to skip the reviewer. If the task turns out bigger, it stops and suggests `dev-loop`.
 
 ### review
 
@@ -99,7 +104,7 @@ make check        # installer tests + source validation (offline)
 make smoke        # fresh install, then check Codex discovers every skill
 make fixtures     # disposable scenarios, incl. flag-field speed benchmark, planted review bug, non-git project
 make bump         # pin all upstream sources to their latest commit
-make run TICKET=ID
+make run TICKET=ID [LOOP=fast-loop]
 ```
 
 - **Update upstream skills:** `make bump` pins every source to its latest commit; then `make check smoke`. Official plugins track upstream `main`, so bump regularly to stay identical to them.

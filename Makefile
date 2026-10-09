@@ -6,11 +6,12 @@ CODEX_DIR ?= $(if $(CODEX_HOME),$(CODEX_HOME),$(INSTALL_HOME)/.codex)
 EVAL_DIR ?= /tmp/codex-workflow-evaluation
 CODEX_BIN ?= codex
 AGENT ?= all
+LOOP ?= dev-loop
 TICKET ?=
 INSTRUCTIONS ?=
 override TICKET := $(value TICKET)
 override INSTRUCTIONS := $(value INSTRUCTIONS)
-export PYTHON WORKSPACE INSTALL_HOME CODEX_DIR EVAL_DIR CODEX_BIN AGENT TICKET INSTRUCTIONS
+export PYTHON WORKSPACE INSTALL_HOME CODEX_DIR EVAL_DIR CODEX_BIN AGENT LOOP TICKET INSTRUCTIONS
 
 .PHONY: help install update install-global update-global test check smoke fixtures bump run
 help:
@@ -23,7 +24,7 @@ help:
 	@echo 'make smoke                                  Check installed Codex discovery in isolation'
 	@echo 'make fixtures [EVAL_DIR="/tmp/path"]         Prepare disposable workflow scenarios'
 	@echo 'make bump                                   Pin every upstream source to its latest commit'
-	@echo 'make run TICKET="URL-or-ID"                 Open Codex with the dev loop'
+	@echo 'make run TICKET="URL-or-ID"                 Open Codex with the dev loop [LOOP=fast-loop]'
 	@echo 'Edit kit/agents, kit/skills and sources.json; run make update to apply changes.'
 
 install update:
@@ -49,4 +50,4 @@ bump:
 
 run:
 	@test -n "$$TICKET" || { echo 'Provide TICKET="URL-or-ID" and optional INSTRUCTIONS="...".' >&2; exit 1; }
-	@"$$CODEX_BIN" -C "$$WORKSPACE" "\$$dev-loop $$TICKET $$INSTRUCTIONS"
+	@"$$CODEX_BIN" -C "$$WORKSPACE" "\$$$$LOOP $$TICKET $$INSTRUCTIONS"
