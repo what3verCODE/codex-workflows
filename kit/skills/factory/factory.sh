@@ -23,8 +23,9 @@ usage() {
 	cat >&2 <<'EOF'
 factory.sh up [--tab] [--kind KIND] ROLE... [-- AGENT-ARGS...]
                               start one agent per role (50/50 split, workers stacked right)
-factory.sh ask ROLE TEXT      send TEXT to ROLE; it writes its report to the printed file
+factory.sh ask ROLE TEXT      send TEXT to ROLE
 factory.sh wait ROLE...       wait (max 9 min) until each ROLE is idle/done/blocked
+factory.sh read ROLE [LINES]  print the last LINES (default 200) of ROLE's pane
 factory.sh status             list roles, panes and agent states
 factory.sh down               close every pane this factory opened
 EOF
@@ -56,7 +57,6 @@ up)
 	[ -n "$kind" ] || kind=$(herdr agent get "$HERDR_PANE_ID" | jq -r '.result.agent.agent // empty')
 	[ -n "$kind" ] || die "cannot detect own agent kind; pass --kind"
 	mkdir -p "$run"
-	rm -f "$run"/*.md
 	: > "$panes"
 
 	set -f; set -- $roles "$@"; set +f   # roles first, then agent args
@@ -89,18 +89,14 @@ up)
 			echo "$role $(pane_of "$role") $(state "$role")"
 		fi
 	done
-	echo "kind: $kind; reports: $run/<role>.md"
+	echo "kind: $kind; files: $run"
 	;;
 ask)
 	[ $# -eq 3 ] || usage
 	[ -n "$(pane_of "$2")" ] || die "no role $2 (have: $(roles | tr '\n' ' '))"
-	report="$run/$2.md"
-	rm -f "$report"
 	# Return once it is working, so a following 'wait' does not see the old idle state.
-	herdr agent prompt "$(name "$2")" "$3
-
-When you finish, write your full report as Markdown to $report and reply only: done." --wait --until working --timeout 30000 >/dev/null
-	echo "sent to $2; report: $report"
+	herdr agent prompt "$(name "$2")" "$3" --wait --until working --timeout 30000 >/dev/null
+	echo "sent to $2"
 	;;
 wait)
 	shift
@@ -110,18 +106,19 @@ wait)
 		herdr agent wait "$(name "$role")" --timeout 540000 > "$run/$role.wait" 2>&1 &
 	done
 	wait
-	for role; do
-		state=$(state "$role")
-		report="$run/$role.md"
-		[ -s "$report" ] && echo "$role $state report: $report" || echo "$role $state (no report yet)"
-	done
+	for role; do echo "$role $(state "$role")"; done
 	;;
 status)
 	[ -s "$panes" ] || { echo "factory not up"; exit 0; }
 	while read -r role pane; do
 		echo "$role $pane $(state "$role")"
 	done < "$panes"
-	echo "reports: $run/<role>.md"
+	;;
+read)
+	[ $# -ge 2 ] || usage
+	[ -n "$(pane_of "$2")" ] || die "no role $2"
+	# Agent UIs pad the screen with blank rows; drop them so LINES counts text.
+	herdr agent read "$(name "$2")" --source recent-unwrapped --lines 2000 | grep -v '^[[:space:]]*$' | tail -n "${3:-200}"
 	;;
 down)
 	[ -s "$panes" ] || { echo "factory not up"; exit 0; }
