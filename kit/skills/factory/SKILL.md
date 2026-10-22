@@ -23,7 +23,7 @@ sh $F down                                # close the worker panes
 
 A worker stuck on a question sends it to your pane as `[role] question` and ends its turn. It may arrive while you are mid-task: answer with `ask ROLE "..."` and carry on. A question you cannot answer from the ticket or code goes to the user.
 
-Your shell may be zsh: never start a word with `=` (`echo =====` fails); use `---` separators.
+Your shell may be zsh: never start a word with `=` (`echo =====` fails), use `---` separators; an unmatched glob is an error (`cat *.md` → "no matches found"), so check with `ls` first or quote it.
 
 A worker in state `blocked` is waiting on an approval or a question in its pane (often a permission prompt or an agent update notice). Do not answer it yourself. Tell the user which pane, and keep going with the others.
 
@@ -92,14 +92,14 @@ Return Must fix and Should fix only. Say "nothing found" if so; do not pad.
 Lanes:
 
 - `ponytail`: "Run the ponytail-review skill. Try to break the change: read every caller of the changed code and feed the code what those callers really pass. Then boundaries (empty, one, many, huge), wrong types, errors from what it calls, and concurrency or ordering if there is any state."
-- `pocock`: "Run the code-review skill. Then check each acceptance criterion in the brief against a run, not the text. Check the tests: for each new test, would it fail on the baseline? Run it there if cheap: copy the baseline version of the file into your scratch dir (never stash or checkout: other panes share this tree). A test that passes on the baseline proves nothing: report it."
+- `pocock`: "Run the code-review skill, but do its Standards and Spec reviews yourself, one after the other, without subagents. Then check each acceptance criterion in the brief against a run, not the text. Check the tests: for each new test, would it fail on the baseline? Run it there if cheap: copy the baseline version of the file into your scratch dir (never stash or checkout: other panes share this tree). A test that passes on the baseline proves nothing: report it."
 - `rules`: "Check the change only against the project's rules: AGENTS.md/CLAUDE.md, rules in the touched folders, docs/agents. Quote the rule for each violation. Logic bugs are other lanes' job."
 
 In the same turn, `ask e2e` "Run your tests against the current tree and report results."
 
-`wait` for all of them and `read` them in one call. Then verify every finding yourself before anything goes to `impl`: open the cited lines and rerun the finding's proof command. A finding is **confirmed** only if your own run shows the failure; reasoning that holds without a run is **likely**; a proof you cannot reproduce is **dropped**. Merge duplicates. Out-of-scope findings (outside the brief's goal and acceptance criteria) go to the report as "not fixed", not to `impl`, unless they break a real caller.
+`wait` for all of them and `read` them in one call. Then verify every finding yourself before anything goes to `impl`: open the cited lines and rerun the finding's proof command. A finding is **confirmed** only if your own run shows the failure; reasoning that holds without a run is **likely**; a proof you cannot reproduce is **dropped**. Merge duplicates. Out-of-scope or exotic findings (outside the brief's goal and acceptance criteria) go to the report under `open:`, not to `impl`, unless they break a real caller; if you send one anyway, say why in the ask.
 
-Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, your own rerun output for each, the reviewers' suggested fixes, and: "Fix the class of problem, not only the cited input: check the similar inputs too (e.g. other quote or whitespace kinds, other callers). Add a failing test first; if the finding is about a weak test, show instead that the new test fails on a broken copy in your scratch dir. In your reply, list the similar inputs you checked." `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
+Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, your own rerun output for each, the reviewers' suggested fixes, and: "Fix the class of problem, not only the cited input: check the similar inputs too (e.g. other quote or whitespace kinds, other callers). Add a failing test first; if the finding is about a weak test, show instead that the new test fails on a broken copy in your scratch dir. In your reply, list the similar inputs you checked." `wait impl`, rerun checks, checkpoint. If a fix changes behavior the ticket did not specify (e.g. now rejects an input that worked), add it to `Assumed:`. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
 
 ## 4. Report
 
@@ -111,7 +111,7 @@ Changed: <behavior, 1-3 lines>
 Files: <list>
 Checks: <command> → <result> (actual output)
 E2E: <result | not run>
-Review: round N; fixed: <titles>; open: <titles | none>; dropped: <count>
+Review: round N; fixed: <titles>; open: <every known unfixed item, including ones you chose to leave | none>; dropped: <count>
 Assumed: <defaults you picked | none>
 Baseline → checkpoint: <ids>
 Panes: still open (sh $F down closes them)

@@ -108,7 +108,7 @@ ask)
 When done, write your full reply as Markdown to $reply (a short pane cannot hold it), then print a 3-line summary.
 Run commands in the foreground and end your turn only when the work is finished: the main agent reads your last reply as the result.
 Experiments (mutants, probes, scratch tests) go in copies under $run/$2/. Never edit tracked files to experiment: other agents share this tree.
-The shell may be zsh: do not start a word with = (echo ===== fails); use --- separators.
+The shell may be zsh: do not start a word with = (echo ===== fails), use --- separators; an unmatched glob (cat *.md) is an error.
 If you are stuck on a question only the main agent can answer, run: herdr agent prompt $HERDR_PANE_ID '[$2] <question>'
 Then end your turn. The answer comes back as your next prompt." --wait --until working --timeout 30000 >/dev/null
 	echo "sent to $2"
