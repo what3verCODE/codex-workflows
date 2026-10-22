@@ -40,6 +40,7 @@ If you install the plugin, the plugin's skills and the kit's copies are duplicat
 | --- | --- |
 | Implement one ticket | `$dev-loop TICKET-42` |
 | Small, clear change, fast | `$fast-loop TICKET-42` |
+| Same ticket, real agents in herdr panes (experimental) | `$factory TICKET-42` |
 | Review a change | `$review since <baseline>` |
 | Sharpen a plan | `$grill-me`, `$grill-with-docs`, `$wayfinder` |
 | Decide between options | `$council-mode <question>` |
