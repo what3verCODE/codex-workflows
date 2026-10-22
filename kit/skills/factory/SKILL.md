@@ -12,7 +12,7 @@ Drive panes only through `factory.sh` (next to this file). It always targets you
 ```sh
 F=<this skill's dir>/factory.sh
 sh $F up [--tab] ROLE... [-- AGENT-ARGS]  # start workers; --tab puts them in a new tab of this workspace
-sh $F ask ROLE "TEXT"                     # send work
+sh $F ask ROLE "TEXT"                     # send work (saved as <factory dir>/ROLE.ask-N.md; the worker gets a one-line pointer to it)
 sh $F wait ROLE...                        # blocks up to 9 min; call again while any role is still "working"
 sh $F read ROLE...                        # each worker's full reply (its reply file, else the pane's last lines)
 sh $F status                              # roles, panes, states
