@@ -56,6 +56,7 @@ up)
 	[ -s "$panes" ] && die "factory already up ($(roles | tr '\n' ' ')); run 'down' first"
 	[ -n "$kind" ] || kind=$(herdr agent get "$HERDR_PANE_ID" | jq -r '.result.agent.agent // empty')
 	[ -n "$kind" ] || die "cannot detect own agent kind; pass --kind"
+	rm -rf "$run"   # leftovers of an earlier run
 	mkdir -p "$run"
 	: > "$panes"
 
@@ -97,6 +98,7 @@ ask)
 	# Return once it is working, so a following 'wait' does not see the old idle state.
 	herdr agent prompt "$(name "$2")" "$3
 
+Run commands in the foreground and end your turn only when the work is finished: the main agent reads your last reply as the result.
 If you are stuck on a question only the main agent can answer, run: herdr agent prompt $HERDR_PANE_ID '[$2] <question>'
 Then end your turn. The answer comes back as your next prompt." --wait --until working --timeout 30000 >/dev/null
 	echo "sent to $2"
@@ -120,8 +122,14 @@ status)
 read)
 	[ $# -ge 2 ] || usage
 	[ -n "$(pane_of "$2")" ] || die "no role $2"
-	# Agent UIs pad the screen with blank rows; drop them so LINES counts text.
-	herdr agent read "$(name "$2")" --source recent-unwrapped --lines 2000 | grep -v '^[[:space:]]*$' | tail -n "${3:-200}"
+	# The scrollback of a working agent cannot be captured (alternate screen).
+	[ "$(state "$2")" != working ] || die "$2 is still working; run 'wait $2' first"
+	# Drop the blank rows agent UIs pad with, and the last input line: when idle it only
+	# holds the agent's suggested next prompt (e.g. "❯ fix 1"), which nobody typed.
+	herdr agent read "$(name "$2")" --source recent-unwrapped --lines 2000 |
+		grep -v '^[[:space:]]*$' |
+		awk '{ l[NR] = $0 } /^[❯›]/ { last = NR } END { for (i = 1; i <= NR; i++) if (i != last) print l[i] }' |
+		tail -n "${3:-200}"
 	;;
 down)
 	[ -s "$panes" ] || { echo "factory not up"; exit 0; }

@@ -66,17 +66,30 @@ Reviewers stay idle until there is a change. `wait impl e2e`. `read` both replie
 
 ## 3. Review (max 2 rounds)
 
-Make a local checkpoint (`vcs-bridge`). Then in one turn send each reviewer the same pin:
+Make a local checkpoint (`vcs-bridge`). Then in one turn send each reviewer the common part plus its lane. Reviewers that all chase the same edge case waste the round, so each one stays in its lane.
+
+Common part:
 
 ```
 Change: baseline <id> → checkpoint <id>, diff: <command>. Brief: <brief path>.
-Do not edit files. Every finding needs path:line and a concrete failing case.
-Return only Must fix and Should fix.
+Do not edit tracked files. Scratch scripts go in <factory dir>/<role>/.
+A finding counts only with proof: the command you ran (a one-off script, a REPL line,
+or a test that fails) and its actual output, next to path:line. Reasoning without a run
+is "unproven": list it separately, at most 3.
+Rank by harm on inputs the code really gets (its callers, the ticket's examples, real
+data), not by how clever the input is. Exotic inputs outside the ticket go last.
+Return Must fix and Should fix only. Say "nothing found" if so; do not pad.
 ```
 
-with its job: `ponytail` "Run the ponytail-review skill", `pocock` "Run the code-review skill", `rules` "List violations of the project's rules files". In the same turn, `ask e2e` "Run your tests against the current tree and report results."
+Lanes:
 
-`wait` for all of them and `read` each reply. Verify every finding yourself as the `review` skill describes (open the lines, check the case, mark confirmed / likely / dropped). Merge duplicates.
+- `ponytail`: "Run the ponytail-review skill. Try to break the change: read every caller of the changed code and feed the code what those callers really pass. Then boundaries (empty, one, many, huge), wrong types, errors from what it calls, and concurrency or ordering if there is any state."
+- `pocock`: "Run the code-review skill. Then check each acceptance criterion in the brief against a run, not the text. Check the tests: for each new test, would it fail on the baseline? Run it there if cheap: copy the baseline version of the file into your scratch dir (never stash or checkout: other panes share this tree). A test that passes on the baseline proves nothing: report it."
+- `rules`: "Check the change only against the project's rules: AGENTS.md/CLAUDE.md, rules in the touched folders, docs/agents. Quote the rule for each violation. Logic bugs are other lanes' job."
+
+In the same turn, `ask e2e` "Run your tests against the current tree and report results."
+
+`wait` for all of them and `read` each reply. Verify every finding yourself as the `review` skill describes (open the lines, rerun the proof, mark confirmed / likely / dropped). A finding whose proof you cannot reproduce is dropped. Merge duplicates. Out-of-scope findings (outside the brief's goal and acceptance criteria) go to the report as "not fixed", not to `impl`, unless they break a real caller.
 
 Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
 
