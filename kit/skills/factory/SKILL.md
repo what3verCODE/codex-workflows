@@ -27,7 +27,7 @@ A worker in state `blocked` is waiting on an approval or a question in its pane 
 
 ## Roles
 
-Pick the roles the task needs. Default: `impl ponytail pocock rules`, plus `e2e` when the project has slow visual/e2e tests.
+Pick the roles the task needs. Default: `impl ponytail pocock rules`, plus `e2e` when the project has slow visual/e2e tests. Drop `rules` when the project has no rules files (no `AGENTS.md`/`CLAUDE.md`, folder rules or docs/agents).
 
 | Role | Job |
 | --- | --- |
@@ -91,7 +91,7 @@ In the same turn, `ask e2e` "Run your tests against the current tree and report 
 
 `wait` for all of them and `read` each reply. Verify every finding yourself as the `review` skill describes (open the lines, rerun the proof, mark confirmed / likely / dropped). A finding whose proof you cannot reproduce is dropped. Merge duplicates. Out-of-scope findings (outside the brief's goal and acceptance criteria) go to the report as "not fixed", not to `impl`, unless they break a real caller.
 
-Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
+Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, the reviewers' proofs and suggested fixes, and: "Fix the class of problem, not only the cited input: check the similar inputs too (e.g. other quote or whitespace kinds, other callers). Add a failing test first. In your reply, list the similar inputs you checked." `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
 
 ## 4. Report
 
