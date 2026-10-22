@@ -95,7 +95,10 @@ ask)
 	[ $# -eq 3 ] || usage
 	[ -n "$(pane_of "$2")" ] || die "no role $2 (have: $(roles | tr '\n' ' '))"
 	# Return once it is working, so a following 'wait' does not see the old idle state.
-	herdr agent prompt "$(name "$2")" "$3" --wait --until working --timeout 30000 >/dev/null
+	herdr agent prompt "$(name "$2")" "$3
+
+If you are stuck on a question only the main agent can answer, run: herdr agent prompt $HERDR_PANE_ID '[$2] <question>'
+Then end your turn. The answer comes back as your next prompt." --wait --until working --timeout 30000 >/dev/null
 	echo "sent to $2"
 	;;
 wait)

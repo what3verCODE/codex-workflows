@@ -21,6 +21,8 @@ sh $F down                                # close the worker panes
 
 `up` fails outside herdr: say so and stop. After `wait`, get each reply with `read`. Raise LINES if the reply's start is cut off. If a reply still does not fit, ask that worker to write it to a file in the factory dir (`up` prints it) and read the file.
 
+A worker stuck on a question sends it to your pane as `[role] question` and ends its turn. It may arrive while you are mid-task: answer with `ask ROLE "..."` and carry on. A question you cannot answer from the ticket or code goes to the user.
+
 A worker in state `blocked` is waiting on an approval or a question in its pane (often a permission prompt or an agent update notice). Do not answer it yourself. Tell the user which pane, and keep going with the others.
 
 ## Roles
