@@ -14,12 +14,12 @@ F=<this skill's dir>/factory.sh
 sh $F up [--tab] ROLE... [-- AGENT-ARGS]  # start workers; --tab puts them in a new tab of this workspace
 sh $F ask ROLE "TEXT"                     # send work
 sh $F wait ROLE...                        # blocks up to 9 min; call again while any role is still "working"
-sh $F read ROLE [LINES]                   # the worker's pane: its reply is at the bottom (default 200 lines)
+sh $F read ROLE [LINES]                   # the worker's full reply (its reply file, else the pane's last lines)
 sh $F status                              # roles, panes, states
 sh $F down                                # close the worker panes
 ```
 
-`up` fails outside herdr: say so and stop. After `wait`, get each reply with `read`. Raise LINES if the reply's start is cut off. If a reply still does not fit, ask that worker to write it to a file in the factory dir (`up` prints it) and read the file.
+`up` fails outside herdr: say so and stop. After `wait`, get each reply with `read`. `ask` has each worker write its full reply to `<factory dir>/<role>.md`, because a pane only gives back about its own height of text; `read` prints that file, or the pane's last lines when there is none.
 
 A worker stuck on a question sends it to your pane as `[role] question` and ends its turn. It may arrive while you are mid-task: answer with `ask ROLE "..."` and carry on. A question you cannot answer from the ticket or code goes to the user.
 
