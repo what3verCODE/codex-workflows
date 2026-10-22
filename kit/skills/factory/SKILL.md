@@ -14,20 +14,27 @@ F=<this skill's dir>/factory.sh
 sh $F up [--tab] ROLE... [-- AGENT-ARGS]  # start workers; --tab puts them in a new tab of this workspace
 sh $F ask ROLE "TEXT"                     # send work
 sh $F wait ROLE...                        # blocks up to 9 min; call again while any role is still "working"
-sh $F read ROLE [LINES]                   # the worker's full reply (its reply file, else the pane's last lines)
+sh $F read ROLE...                        # each worker's full reply (its reply file, else the pane's last lines)
 sh $F status                              # roles, panes, states
 sh $F down                                # close the worker panes
 ```
 
-`up` fails outside herdr: say so and stop. After `wait`, get each reply with `read`. `ask` has each worker write its full reply to `<factory dir>/<role>.md`, because a pane only gives back about its own height of text; `read` prints that file, or the pane's last lines when there is none.
+`up` fails outside herdr: say so and stop. If `up` shows a role NOT READY or not idle, a startup prompt is waiting in that pane (folder trust in a new directory, an update notice): tell the user right away which panes and what they ask, then `status` until they are idle. After `wait`, get each reply with `read`. `ask` has each worker write its full reply to `<factory dir>/<role>.md`, because a pane only gives back about its own height of text; `read` prints that file, or the pane's last lines when there is none.
 
 A worker stuck on a question sends it to your pane as `[role] question` and ends its turn. It may arrive while you are mid-task: answer with `ask ROLE "..."` and carry on. A question you cannot answer from the ticket or code goes to the user.
+
+Your shell may be zsh: never start a word with `=` (`echo =====` fails); use `---` separators.
 
 A worker in state `blocked` is waiting on an approval or a question in its pane (often a permission prompt or an agent update notice). Do not answer it yourself. Tell the user which pane, and keep going with the others.
 
 ## Roles
 
-Pick the roles the task needs. Default: `impl ponytail pocock rules`, plus `e2e` when the project has slow visual/e2e tests. Drop `rules` when the project has no rules files (no `AGENTS.md`/`CLAUDE.md`, folder rules or docs/agents).
+Pick the roles the task needs. Each worker costs a fresh context on every call, so start only the ones that earn it:
+
+- Small change (one area, a few files, under ~100 changed lines expected): `impl pocock`.
+- Bigger change: `impl ponytail pocock`.
+- Add `rules` only when the project has rules files (`AGENTS.md`/`CLAUDE.md`, folder rules, docs/agents).
+- Add `e2e` when the project has slow visual/e2e tests.
 
 | Role | Job |
 | --- | --- |
@@ -51,9 +58,10 @@ Where: <files/symbols to start from>
 Baseline: <id>, VCS: <tool>, diff: <command>
 Checks: <exact test/lint/build commands>
 Not in scope: <...>
+Assumed: <behavior the ticket leaves open and you picked, e.g. tie order; or "none">
 ```
 
-Open questions that change what gets built: ask the user before step 2.
+Behavior the ticket leaves open: pick the default that is cheap to change later, write it under `Assumed:`, and repeat it in the report. Ask the user before step 2 only when the choice is hard to undo (public API or data format, data migration, anything user-facing the ticket's author would expect to decide).
 
 ## 2. Build
 
@@ -89,11 +97,13 @@ Lanes:
 
 In the same turn, `ask e2e` "Run your tests against the current tree and report results."
 
-`wait` for all of them and `read` each reply. Verify every finding yourself as the `review` skill describes (open the lines, rerun the proof, mark confirmed / likely / dropped). A finding whose proof you cannot reproduce is dropped. Merge duplicates. Out-of-scope findings (outside the brief's goal and acceptance criteria) go to the report as "not fixed", not to `impl`, unless they break a real caller.
+`wait` for all of them and `read` them in one call. Then verify every finding yourself before anything goes to `impl`: open the cited lines and rerun the finding's proof command. A finding is **confirmed** only if your own run shows the failure; reasoning that holds without a run is **likely**; a proof you cannot reproduce is **dropped**. Merge duplicates. Out-of-scope findings (outside the brief's goal and acceptance criteria) go to the report as "not fixed", not to `impl`, unless they break a real caller.
 
-Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, the reviewers' proofs and suggested fixes, and: "Fix the class of problem, not only the cited input: check the similar inputs too (e.g. other quote or whitespace kinds, other callers). Add a failing test first. In your reply, list the similar inputs you checked." `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
+Confirmed must/should findings and e2e failures: `ask impl` with the numbered list, your own rerun output for each, the reviewers' suggested fixes, and: "Fix the class of problem, not only the cited input: check the similar inputs too (e.g. other quote or whitespace kinds, other callers). Add a failing test first; if the finding is about a weak test, show instead that the new test fails on a broken copy in your scratch dir. In your reply, list the similar inputs you checked." `wait impl`, rerun checks, checkpoint. Round 2: ask the reviewers who had findings to recheck only those against the new checkpoint, and `e2e` to rerun. After round 2 stop and report what is still open.
 
 ## 4. Report
+
+Use this block as is (fenced), then at most 3 lines of notes.
 
 ```
 Roles: <list>
@@ -102,6 +112,7 @@ Files: <list>
 Checks: <command> → <result> (actual output)
 E2E: <result | not run>
 Review: round N; fixed: <titles>; open: <titles | none>; dropped: <count>
+Assumed: <defaults you picked | none>
 Baseline → checkpoint: <ids>
 Panes: still open (sh $F down closes them)
 ```

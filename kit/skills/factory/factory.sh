@@ -25,7 +25,7 @@ factory.sh up [--tab] [--kind KIND] ROLE... [-- AGENT-ARGS...]
                               start one agent per role (50/50 split, workers stacked right)
 factory.sh ask ROLE TEXT      send TEXT to ROLE
 factory.sh wait ROLE...       wait (max 9 min) until each ROLE is idle/done/blocked
-factory.sh read ROLE [LINES]  print ROLE's reply file, or else the last LINES (default 200) of its pane
+factory.sh read ROLE...       print each ROLE's reply file, or else the last 200 lines of its pane
 factory.sh status             list roles, panes and agent states
 factory.sh down               close every pane this factory opened
 EOF
@@ -89,6 +89,11 @@ up)
 		else
 			echo "$role $(pane_of "$role") $(state "$role")"
 		fi
+		# A prompt at startup (folder trust, update notice) blocks the agent: show what it asks.
+		if [ "$(state "$role")" != idle ]; then
+			herdr pane read "$(pane_of "$role")" --source visible 2>/dev/null |
+				grep -iE '\?|update available' | head -2 | sed 's/^ */    asks: /'
+		fi
 	done
 	echo "kind: $kind; files: $run"
 	;;
@@ -102,6 +107,8 @@ ask)
 
 When done, write your full reply as Markdown to $reply (a short pane cannot hold it), then print a 3-line summary.
 Run commands in the foreground and end your turn only when the work is finished: the main agent reads your last reply as the result.
+Experiments (mutants, probes, scratch tests) go in copies under $run/$2/. Never edit tracked files to experiment: other agents share this tree.
+The shell may be zsh: do not start a word with = (echo ===== fails); use --- separators.
 If you are stuck on a question only the main agent can answer, run: herdr agent prompt $HERDR_PANE_ID '[$2] <question>'
 Then end your turn. The answer comes back as your next prompt." --wait --until working --timeout 30000 >/dev/null
 	echo "sent to $2"
@@ -123,18 +130,24 @@ status)
 	done < "$panes"
 	;;
 read)
-	[ $# -ge 2 ] || usage
-	[ -n "$(pane_of "$2")" ] || die "no role $2"
-	# The scrollback of a working agent cannot be captured (alternate screen).
-	[ "$(state "$2")" != working ] || die "$2 is still working; run 'wait $2' first"
-	if [ -s "$run/$2.md" ]; then cat "$run/$2.md"; exit 0; fi
-	# No reply file (e.g. a question): the pane holds only about its own height of text.
-	# Drop the blank rows agent UIs pad with, and the last input line: when idle it only
-	# holds the agent's suggested next prompt (e.g. "❯ fix 1"), which nobody typed.
-	herdr agent read "$(name "$2")" --source recent-unwrapped --lines 2000 |
-		grep -v '^[[:space:]]*$' |
-		awk '{ l[NR] = $0 } /^[❯›]/ { last = NR } END { for (i = 1; i <= NR; i++) if (i != last) print l[i] }' |
-		tail -n "${3:-200}"
+	shift
+	[ $# -gt 0 ] || usage
+	for role; do
+		[ -n "$(pane_of "$role")" ] || die "no role $role"
+		# The scrollback of a working agent cannot be captured (alternate screen).
+		[ "$(state "$role")" != working ] || die "$role is still working; run 'wait $role' first"
+	done
+	for role; do
+		echo "------ $role"
+		if [ -s "$run/$role.md" ]; then cat "$run/$role.md"; continue; fi
+		# No reply file (e.g. a question): the pane holds only about its own height of text.
+		# Drop the blank rows agent UIs pad with, and the last input line: when idle it only
+		# holds the agent's suggested next prompt (e.g. "❯ fix 1"), which nobody typed.
+		herdr agent read "$(name "$role")" --source recent-unwrapped --lines 2000 |
+			grep -v '^[[:space:]]*$' |
+			awk '{ l[NR] = $0 } /^[❯›]/ { last = NR } END { for (i = 1; i <= NR; i++) if (i != last) print l[i] }' |
+			tail -n 200
+	done
 	;;
 down)
 	[ -s "$panes" ] || { echo "factory not up"; exit 0; }
